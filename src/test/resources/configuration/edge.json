@@ -1,0 +1,11 @@
+{
+  "platform": "edge",
+  "capabilities": {
+    "caps": {
+    }
+  },
+  "startMaximized": true,
+  "baseUrl": "https://www.google.com/",
+  "timeout": 60000,
+  "pollingInterval": 200
+}
