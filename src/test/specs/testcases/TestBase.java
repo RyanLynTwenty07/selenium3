@@ -6,7 +6,6 @@ import org.example.driver.ConfigLoader;
 import org.example.driver.Configuration;
 import org.example.driver.DriverManager;
 import org.example.driver.Platform;
-import org.junit.jupiter.api.BeforeAll;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Optional;

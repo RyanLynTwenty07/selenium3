@@ -6,7 +6,6 @@ import org.example.data.EmailData;
 import org.example.page.dnmail.LoginPage;
 import org.example.data.PageName;
 import org.example.page.dnmail.MailBoxPage;
-import org.junit.jupiter.api.BeforeAll;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

@@ -1,8 +1,6 @@
 package org.example.element.control;
 
-import com.codeborne.selenide.SelenideDriver;
-import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.SelenideWait;
+import com.codeborne.selenide.*;
 import org.example.driver.Configuration;
 import org.example.driver.DriverManager;
 import org.example.driver.statics.DriverUtils;
@@ -148,6 +146,7 @@ public class BaseElement {
         } else {
             findElement().click();
         }
+
     }
 
     public void click(int offsetX, int offsetY) {
@@ -238,7 +237,10 @@ public class BaseElement {
      * @param value
      */
     public void enter(CharSequence... value) {
-        findElement().sendKeys(value);
+//        findElement().sendKeys(value);
+        for (CharSequence v : value) {
+            findElement().val(SetValueOptions.withText(v).sensitive());
+        }
     }
 
     /**
