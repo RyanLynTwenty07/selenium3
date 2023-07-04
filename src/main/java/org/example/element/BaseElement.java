@@ -269,6 +269,12 @@ public class BaseElement {
         findElement().sendKeys(value);
     }
 
+    public void switchToFrame(){
+        driver().switchTo().frame(findElement());
+    }
+
+
+
     public void clear() {
         findElement().clear();
     }
