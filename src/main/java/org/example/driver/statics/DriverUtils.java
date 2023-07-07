@@ -25,6 +25,8 @@ public class DriverUtils {
 
     public static void switchToWindow(int window) {
         DriverManager.driver().getDriver().switchTo().window(window -1);
+    }public static void closeWindown(int window) {
+        DriverManager.driver().getDriver().switchTo().window(window -1).close();
     }
 
     public static String getWindowHandle() {

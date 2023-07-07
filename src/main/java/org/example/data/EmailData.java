@@ -9,4 +9,6 @@ public class EmailData {
     private String cc;
     private String subject;
     private String content;
+    private String imgPath;
+    private String attachmentPath;
 }

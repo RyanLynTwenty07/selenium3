@@ -1,15 +1,28 @@
 package org.example.page.dnmail;
 
 import io.qameta.allure.Step;
+import lombok.Data;
 import org.example.element.control.BaseElement;
 
 public class LoginPage extends HomePage {
 
-    @Step("Login with user name: {username}")
-    public void login(String username, String password) {
-        userNameTextBox.enter(username);
-        passwordTextBox.enter(password);
+    @Step("Login with user name: {userData}")
+    public void login(User userData) {
+        userNameTextBox.enter(userData.username);
+        passwordTextBox.enter(userData.password);
         signInButton.click();
+    }
+
+    @Data
+    public static class User {
+
+        private String username;
+        private String password;
+
+        @Override
+        public String toString() {
+            return "Username: " + this.username + " - " + "Password: " + this.password.replaceAll("\\w", "*");
+        }
     }
 
     BaseElement userNameTextBox = new BaseElement("name=username");
