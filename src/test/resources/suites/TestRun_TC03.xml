@@ -9,9 +9,5 @@
         <classes>
             <class name="testcases.LgiGearMail_TC01"/>
         </classes>
-    </test><test name="Run Test Case For DN LogiGear email 2">
-        <classes>
-            <class name="testcases.LgiGearMail_TC01"/>
-        </classes>
     </test>
 </suite>

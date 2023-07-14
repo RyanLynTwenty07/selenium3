@@ -102,12 +102,6 @@ public class BaseElement {
         SelenideWait wait = new SelenideWait(webDriver(), timeout.getSeconds(), getConfig().getPollingInterval());
         return wait;
     }
-//    public SelenideElement elementIntractable() {
-//        if (this.elementIntractable == null || this.alwaysFind) {
-//            this.elementIntractable = waitForClickable();
-//        }
-//        return this.elementIntractable;
-//    }
 
     public SelenideElement waitForClickable() {
         return waitForClickable(timeout());
@@ -202,6 +196,9 @@ public class BaseElement {
     public boolean isSelected() {
         return findElement().isSelected();
     }
+    public boolean isDisplayed() {
+        return findElement().isDisplayed();
+    }
 
     public void check() {
         if (!isChecked()) {
@@ -237,7 +234,6 @@ public class BaseElement {
      * @param value
      */
     public void enter(CharSequence... value) {
-//        findElement().sendKeys(value);
         for (CharSequence v : value) {
             findElement().val(SetValueOptions.withText(v).sensitive());
         }

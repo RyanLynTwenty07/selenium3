@@ -11,7 +11,7 @@ import org.openqa.selenium.Keys;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-public class MailBoxPage implements IHomePage {
+public class MailBoxPage extends HomePage {
 
     @Step("Compose email to send {data}")
     public void composeEmail(EmailData data) {
@@ -36,11 +36,18 @@ public class MailBoxPage implements IHomePage {
             insertButton.click();
         }
         DriverUtils.switchToMain();
-        sendButton.click();
     }
 
     public void inputFile(String path) {
         inputFile.enter(path);
+    }
+
+    public void clickSave(){
+        saveButton.click();
+    }
+
+    public void clickSend(){
+        sendButton.click();
     }
 
     @SneakyThrows
@@ -66,10 +73,14 @@ public class MailBoxPage implements IHomePage {
 
     BaseElement contentTextArea = new BaseElement("//body[@fpstyle=1]");
     BaseElement sendButton = new BaseElement("id=send");
+    BaseElement saveButton = new BaseElement("id=save");
     BaseElement attachmentButton = new BaseElement("class=csimg csimgbg sprites-attach-png tbLh tbBefore tbAfter");
     BaseElement insertImgButton = new BaseElement("//img[@class='csimg csimgbg sprites-insertimage-png tbLh tbBefore tbAfter']");
     BaseElement chooseFileButton = new BaseElement("//div[not(contains(@style,'display: none'))]/input[@class='fileField']");
     BaseElement insertButton = new BaseElement("id=btnAttch");
     BaseElement inputFile = new BaseElement("name=uploadfile");
-    // assuming driver is a healthy WebDriver instance
+
+
+
+
 }

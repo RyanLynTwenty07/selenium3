@@ -11,5 +11,5 @@ public interface IHomePage {
         DriverUtils.open(page.toString());
     }
 
-
+    void clickButton(String button);
 }

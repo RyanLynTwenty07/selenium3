@@ -1,5 +1,12 @@
 package org.example.page.agoda;
 
-public class LandingPage {
+import org.example.page.general.IHomePage;
 
+public class LandingPage implements IHomePage {
+
+
+    @Override
+    public void clickButton(String button) {
+
+    }
 }

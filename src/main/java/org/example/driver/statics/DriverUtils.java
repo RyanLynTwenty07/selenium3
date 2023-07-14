@@ -1,6 +1,6 @@
 package org.example.driver.statics;
 
-import org.example.driver.Driver;
+import io.qameta.allure.Step;
 import org.example.driver.DriverManager;
 
 import java.util.ArrayList;
@@ -24,9 +24,13 @@ public class DriverUtils {
     }
 
     public static void switchToWindow(int window) {
-        DriverManager.driver().getDriver().switchTo().window(window -1);
-    }public static void closeWindown(int window) {
-        DriverManager.driver().getDriver().switchTo().window(window -1).close();
+        DriverManager.driver().getDriver().switchTo().window(window - 1);
+    }
+
+    @Step("Close window number {window}")
+    public static void closeWindow(int window) {
+        DriverManager.driver().getDriver().switchTo().window(window - 1).close();
+        switchToWindow(getWindowHandles().size());
     }
 
     public static String getWindowHandle() {
