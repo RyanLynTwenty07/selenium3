@@ -1,0 +1,9 @@
+/target/
+/.settings/
+/allure-results/
+/test-output/
+/.classpath
+/.gitignore
+/.project
+/.idea
+
