@@ -1,12 +1,24 @@
 # Introduce Framework selenium-java
 1. Structure
-2. Dependencies
-3. Test Run
-4. Paralell 
-5. CI/CD
-6. Report
+   Build framework based on POM
+   Page: Page Object
+   Data: Data object
+   Test: Test scripts
+   Ultilities: Common, supports reader files and more...
+   Suite: config test run
+3. Dependencies
+   Include in POM
+5. Test Run
+   Using TestNG
+7. Paralell 
+8. CI/CD
+   Migrate and associate with ADO
+10. Report
+    Using Allure Report
 
 # Set up Environment
+1. Install JDK
+2. Install InteliJi
 
 # Configure to run scripts
 To run script for EX 1:
