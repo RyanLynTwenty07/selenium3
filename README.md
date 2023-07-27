@@ -21,9 +21,9 @@
 2. Install InteliJi
 
 # Configure to run scripts
-To run script for EX 1:
-To run script for EX 2:
-To run script for EX 3: LogiGear Mail
+1. To run script for EX 1: VietJetAir
+2. To run script for EX 2: AGODA
+3. To run script for EX 3: LogiGear Mail
 Please set environment variable:
 username ="", 
 password =""
