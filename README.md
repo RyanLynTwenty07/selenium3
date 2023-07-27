@@ -1,11 +1,11 @@
 # Introduce Framework selenium-java
 1. Structure
-   Build framework based on POM
-   Page: Page Object: where to manage the element of page, like and interface(label, textbox, button...), actions(login, selectDateTime, composeEmail)
-   example: LoginPage, BookingPage, CreditPage...
-   Data: Data object 
-   Test: Test scripts
-   Ultilities: Common, supports reader files and more...
+  - Build framework based on POM
+  - Page: Page Object: where to manage the element of page, like and interface(label, textbox, button...), actions(login, selectDateTime, composeEmail)
+   -> example: LoginPage, BookingPage, CreditPage...
+  - Data: Data object 
+  - Test: Test scripts
+  - Ultilities: Common, supports reader files and more...
    Suite: config test run
 3. Dependencies
    Include in POM
