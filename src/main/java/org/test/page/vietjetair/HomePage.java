@@ -1,6 +1,6 @@
-package org.example.page.vietjetair;
+package org.test.page.vietjetair;
 
-import org.example.page.general.IHomePage;
+import org.test.page.general.IHomePage;
 
 public class HomePage implements IHomePage {
 

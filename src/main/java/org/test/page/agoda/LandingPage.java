@@ -1,6 +1,6 @@
-package org.example.page.agoda;
+package org.test.page.agoda;
 
-import org.example.page.general.IHomePage;
+import org.test.page.general.IHomePage;
 
 public class LandingPage implements IHomePage {
 

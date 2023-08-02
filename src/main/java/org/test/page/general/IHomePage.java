@@ -1,8 +1,8 @@
-package org.example.page.general;
+package org.test.page.general;
 
 import io.qameta.allure.Step;
 import org.example.driver.statics.DriverUtils;
-import org.example.data.PageName;
+import org.test.data.PageName;
 
 public interface IHomePage {
 

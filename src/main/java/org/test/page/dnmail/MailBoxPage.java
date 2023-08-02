@@ -1,11 +1,10 @@
-package org.example.page.dnmail;
+package org.test.page.dnmail;
 
 import io.qameta.allure.Step;
 import lombok.SneakyThrows;
-import org.example.data.EmailData;
+import org.test.data.EmailData;
 import org.example.driver.statics.DriverUtils;
 import org.example.element.control.BaseElement;
-import org.example.page.general.IHomePage;
 import org.openqa.selenium.Keys;
 
 import java.awt.*;

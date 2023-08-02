@@ -1,7 +1,5 @@
-package testcases;
+package testcases.base;
 
-import com.codeborne.selenide.logevents.SelenideLogger;
-import io.qameta.allure.selenide.AllureSelenide;
 import org.example.driver.ConfigLoader;
 import org.example.driver.Configuration;
 import org.example.driver.DriverManager;
@@ -11,7 +9,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
-import static org.example.common.Constants.CONFIG_FILES;
+import static org.test.common.Constants.CONFIG_FILES;
 
 public class TestBase {
 

@@ -1,4 +1,4 @@
-package org.example.page.dnmail;
+package org.test.page.dnmail;
 
 import io.qameta.allure.Step;
 import lombok.Data;

@@ -1,33 +1,34 @@
 package org.example.element.control;
 
-import com.codeborne.selenide.*;
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideDriver;
+import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.SetValueOptions;
 import org.example.driver.Configuration;
 import org.example.driver.DriverManager;
 import org.example.driver.statics.DriverUtils;
-import org.openqa.selenium.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.WebDriver;
 
 import java.time.Duration;
 import java.util.List;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.*;
-
 public class BaseElement {
 
-    private static final Logger log = LoggerFactory.getLogger(BaseElement.class);
     protected String locator;
     protected By by;
     protected String locatorType;
     protected String locatorValue;
     protected String dynamicLocator;
     protected SelenideElement element;
-    protected boolean alwaysFind = false;
-
     protected SelenideDriver selenideDriver;
 
-    public String getLocator() {
-        return locator;
+    public BaseElement(String locator) {
+        this.locator = locator;
+        this.dynamicLocator = locator;
+        this.by = by();
     }
 
     protected By by() {
@@ -55,60 +56,29 @@ public class BaseElement {
         }
     }
 
-    protected Duration timeout() {
-        return Duration.ofMillis(DriverManager.driver().getConfig().getTimeOut());
+    protected SelenideDriver driver() {
+        return DriverManager.driver().getDriver();
     }
 
-    private WebDriver webDriver() {
+    protected WebDriver webDriver() {
         return DriverManager.driver().getDriver().getWebDriver();
     }
 
-    private SelenideDriver driver() {
-        return DriverManager.driver().getDriver();
+    protected Duration timeout() {
+        return Duration.ofMillis(DriverManager.driver().getConfig().getTimeOut());
     }
 
     private Configuration getConfig() {
         return DriverManager.driver().getConfig();
     }
 
-    public BaseElement(String locator) {
-        this.locator = locator;
-        this.dynamicLocator = locator;
-        this.by = by();
+    public SelenideElement findElement() {
+        this.element = driver().$(by());
+        return this.element;
     }
 
-    protected BaseElement(String locator, boolean alwaysFind) {
-        this(locator);
-        this.alwaysFind = alwaysFind;
-    }
-
-    protected BaseElement(By by) {
-        this.by = by;
-    }
-
-    public BaseElement(BaseElement parent, String locator, boolean alwaysFind) {
-        this.locator = locator;
-        this.dynamicLocator = locator;
-        this.by = by();
-        this.alwaysFind = alwaysFind;
-    }
-
-    public SelenideWait Wait() {
-        return Wait(timeout());
-    }
-
-    public SelenideWait Wait(Duration timeout) {
-        log.debug("Time out is {} milliseconds", timeout.toMillis());
-        SelenideWait wait = new SelenideWait(webDriver(), timeout.getSeconds(), getConfig().getPollingInterval());
-        return wait;
-    }
-
-    public SelenideElement waitForClickable() {
-        return waitForClickable(timeout());
-    }
-
-    public SelenideElement waitForClickable(Duration duration) {
-        return (SelenideElement) Wait(duration).until(elementToBeClickable(findElement()));
+    public String getLocator() {
+        return locator;
     }
 
     public void set(Object... args) {
@@ -117,21 +87,8 @@ public class BaseElement {
         this.by = by();
     }
 
-    public SelenideElement findElement() {
-        this.element = driver().$(by());
-        return this.element;
-    }
-
     public List<SelenideElement> findElements() {
         return driver().$$(webDriver().findElements(by()));
-    }
-
-    private void click(SelenideElement element, int offsetX, int offsetY) {
-        if (getConfig().isClickViaJs()) {
-            clickViaJS(offsetX, offsetY);
-        } else {
-            DriverManager.driver().actions().moveToElement(element, offsetX, offsetY).click().build().perform();
-        }
     }
 
     public void click() {
@@ -140,7 +97,6 @@ public class BaseElement {
         } else {
             findElement().click();
         }
-
     }
 
     public void click(int offsetX, int offsetY) {
@@ -151,11 +107,19 @@ public class BaseElement {
         findElement().sendKeys(Keys.ENTER);
     }
 
+    public void click(SelenideElement element, int offsetX, int offsetY) {
+        if (getConfig().isClickViaJs()) {
+            clickViaJS(offsetX, offsetY);
+        } else {
+            DriverManager.driver().actions().moveToElement(element, offsetX, offsetY).click().build().perform();
+        }
+    }
+
     public void pressEscape() {
         findElement().sendKeys(Keys.ESCAPE);
     }
 
-    public void PressTab() {
+    public void pressTab() {
         findElement().sendKeys(Keys.TAB);
     }
 
@@ -169,7 +133,7 @@ public class BaseElement {
     }
 
     public boolean isChecked() {
-        return isSelected();
+        return findElement().is(Condition.checked);
     }
 
     public void clickViaJS(int offsetX, int offsetY) {
@@ -189,13 +153,10 @@ public class BaseElement {
         clickViaJS(0, 0);
     }
 
-    public String getAttribute(String name) {
-        return findElement().getAttribute(name);
-    }
-
     public boolean isSelected() {
         return findElement().isSelected();
     }
+
     public boolean isDisplayed() {
         return findElement().isDisplayed();
     }
@@ -220,6 +181,10 @@ public class BaseElement {
         return getAttribute("value");
     }
 
+    public String getAttribute(String name) {
+        return findElement().getAttribute(name);
+    }
+
     public String getText() {
         return findElement().getText();
     }
@@ -228,11 +193,6 @@ public class BaseElement {
         driver().executeJavaScript("arguments[0].scrollIntoView(true);", findElement());
     }
 
-    /**
-     * Enter text into the element.
-     *
-     * @param value
-     */
     public void enter(CharSequence... value) {
         for (CharSequence v : value) {
             findElement().val(SetValueOptions.withText(v).sensitive());
@@ -267,13 +227,59 @@ public class BaseElement {
         findElement().sendKeys(value);
     }
 
-    public void switchToFrame(){
+    public void switchToFrame() {
         driver().switchTo().frame(findElement());
     }
 
-
-
     public void clear() {
         findElement().clear();
+    }
+
+    public void select(String text) {
+        findElement().selectOption(text);
+    }
+
+    public void select(int index) {
+        findElement().selectOption(index);
+    }
+
+    public String getSelected() {
+        return findElement().getSelectedOptionText();
+    }
+
+    public List<String> getSelectOptions() {
+        return findElement().getSelectedOptions().texts();
+    }
+
+    public SelenideElement waitForClickable() {
+        return waitForClickable(timeout());
+    }
+
+    public SelenideElement waitForClickable(Duration duration) {
+        return findElement().should(Condition.and("Can be clickable", Condition.visible, Condition.enabled), duration);
+    }
+
+    public SelenideElement waiForVisible(Duration duration) {
+        return findElement().should(Condition.visible, duration);
+    }
+
+    public SelenideElement waiForVisible() {
+        return waiForVisible(timeout());
+    }
+
+    public SelenideElement waiForInvisible(Duration duration) {
+        return findElement().should(Condition.disappear, duration);
+    }
+
+    public SelenideElement waiForInvisible() {
+        return waiForInvisible(timeout());
+    }
+
+    public SelenideElement waiForExist(Duration duration) {
+        return findElement().should(Condition.exist, duration);
+    }
+
+    public SelenideElement waiForExist() {
+        return waiForExist(timeout());
     }
 }
