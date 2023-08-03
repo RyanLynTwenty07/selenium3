@@ -1,7 +1,7 @@
-package org.com.page.dnmail;
+package org.example.page.dnmail;
 
-import org.com.page.general.IHomePage;
-import org.com.element.control.BaseElement;
+import org.example.page.general.IHomePage;
+import org.com.element.BaseElement;
 
 public class HomePage implements IHomePage {
 

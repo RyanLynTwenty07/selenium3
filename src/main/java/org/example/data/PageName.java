@@ -1,4 +1,4 @@
-package org.com.data;
+package org.example.data;
 
 public enum PageName {
 
