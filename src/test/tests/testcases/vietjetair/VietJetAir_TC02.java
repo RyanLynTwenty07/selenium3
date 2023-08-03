@@ -1,8 +1,8 @@
 package testcases.vietjetair;
 
-import org.com.data.email.EmailData;
-import org.com.page.dnmail.LoginPage;
-import org.com.page.dnmail.MailBoxPage;
+import org.example.data.email.EmailData;
+import org.example.page.dnmail.LoginPage;
+import org.example.page.dnmail.MailBoxPage;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import base.TestBase;

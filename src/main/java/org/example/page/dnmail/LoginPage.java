@@ -1,8 +1,8 @@
-package org.com.page.dnmail;
+package org.example.page.dnmail;
 
 import io.qameta.allure.Step;
 import lombok.Data;
-import org.com.element.control.BaseElement;
+import org.com.element.BaseElement;
 
 public class LoginPage extends HomePage {
 

@@ -1,4 +1,4 @@
-package org.com.data.vj;
+package org.example.data.vj;
 
 import lombok.Data;
 

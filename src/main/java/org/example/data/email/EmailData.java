@@ -1,4 +1,4 @@
-package org.com.data.email;
+package org.example.data.email;
 
 import lombok.Data;
 

@@ -2,12 +2,12 @@ package testcases.dnmail;
 
 import base.TestBase;
 import org.apache.commons.lang3.RandomUtils;
-import org.com.data.PageName;
-import org.com.data.email.EmailData;
+import org.example.data.PageName;
+import org.example.data.email.EmailData;
 import org.com.driver.statics.DriverUtils;
 
-import org.com.page.dnmail.LoginPage;
-import org.com.page.dnmail.MailBoxPage;
+import org.example.page.dnmail.LoginPage;
+import org.example.page.dnmail.MailBoxPage;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

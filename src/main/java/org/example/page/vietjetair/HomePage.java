@@ -1,8 +1,8 @@
-package org.com.page.vietjetair;
+package org.example.page.vietjetair;
 
-import org.com.data.vj.SearchTicketData;
-import org.com.element.control.BaseElement;
-import org.com.page.general.IHomePage;
+import org.example.data.vj.SearchTicketData;
+import org.com.element.BaseElement;
+import org.example.page.general.IHomePage;
 
 import java.time.LocalDate;
 import java.time.Month;
