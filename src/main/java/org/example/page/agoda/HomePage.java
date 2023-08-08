@@ -5,6 +5,7 @@ import org.com.element.BaseElement;
 import org.com.utils.DateUtils;
 
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.time.LocalDate;
 
 public class HomePage extends LandingPage {
@@ -68,9 +69,8 @@ public class HomePage extends LandingPage {
     }
 
     private void discardPromoMessage() {
-        if (promoNoThankButton.isDisplayed()) {
-            promoNoThankButton.click();
-        }
+        promoNoThankButton.waitForVisible(Duration.ofMinutes(1));
+        promoNoThankButton.click();
     }
 
     protected BaseElement placeBox = new BaseElement("//div[@id='autocomplete-box']");

@@ -5,13 +5,9 @@ import org.com.driver.Configuration;
 import org.com.driver.DriverManager;
 import org.com.driver.statics.DriverUtils;
 import org.openqa.selenium.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
 import java.util.List;
-
-import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 public class BaseElement {
 
@@ -284,7 +280,20 @@ public class BaseElement {
     public SelenideElement waitForDisappear(Duration duration) {
         return findElement().should(Condition.disappear, duration);
     }
+
     public SelenideElement waitForDisappear() {
         return waitForDisappear(timeout());
+    }
+
+    public void checkText(String text, Duration duration) {
+        findElement().shouldHave(Condition.text(text), duration);
+    }
+
+    public void checkText(String text) {
+        checkText(text, timeout());
+    }
+
+    public void switchNextTab() {
+        driver().switchTo().window(1);
     }
 }

@@ -14,11 +14,11 @@ public class HotelTitle {
 
     public ArrayList<HotelTitle> returnListHotelRec() {
         ArrayList<HotelTitle> hotelsList = new ArrayList<>();
-        hotelsList.add(new HotelTitle("Radisson Hotel Danang","Phước Mỹ, Da Nang - 2.1 km to center"));
-        hotelsList.add(new HotelTitle("SALA DANANG BEACH HOTEL","Phước Mỹ, Da Nang - 2.1 km to center"));
-        hotelsList.add(new HotelTitle("Hilton Da Nang","Hải Châu, Da Nang - City center"));
-        hotelsList.add(new HotelTitle("Fanta Suite Villa","Phước Mỹ, Da Nang - 1.9 km to center"));
-        hotelsList.add(new HotelTitle("New Orient Hotel Da Nang","Hải Châu, Da Nang - City center"));
+        hotelsList.add(new HotelTitle("The Grumpy House","Phước Mỹ, Da Nang - 2.1 km to center"));
+        hotelsList.add(new HotelTitle("Grand Sunrise 3 Hotel & Spa Da Nang","Phước Mỹ, Da Nang - 2.1 km to center"));
+        hotelsList.add(new HotelTitle("NHA TRO TYTY","Phước Mỹ, Da Nang - 2.1 km to center"));
+        hotelsList.add(new HotelTitle("Si House","Hòa Hải, Da Nang - 3.7 km to center"));
+        hotelsList.add(new HotelTitle("nhà nghỉ family","Lang Co, Da Nang - 36.5 km to center"));
         return hotelsList;
     }
 }
