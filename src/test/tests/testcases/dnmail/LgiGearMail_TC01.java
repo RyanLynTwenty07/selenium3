@@ -18,7 +18,7 @@ public class LgiGearMail_TC01 extends TestBase {
         emailData.setTo("linh.nguyen@logigear.com");
         emailData.setSubject(String.format("Email the [%d] is sent successfully!", RandomUtils.nextInt(1, 1000)));
         emailData.setContent("Test email is send successfully!");
-        emailData.setImgPath("E:\\selenide_java\\src\\test\\resources\\data\\attachment\\ArivalReasonCodes.PNG");
+        emailData.setImgPath("src/test/resources/data/dnmail/ArivalReasonCodes.PNG");
         user.setUsername(System.getenv("username"));
         user.setPassword(System.getenv("password"));
     }

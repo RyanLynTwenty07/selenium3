@@ -257,27 +257,34 @@ public class BaseElement {
         return findElement().should(Condition.and("Can be clickable", Condition.visible, Condition.enabled), duration);
     }
 
-    public SelenideElement waiForVisible(Duration duration) {
+    public SelenideElement waitForVisible(Duration duration) {
         return findElement().should(Condition.visible, duration);
     }
 
-    public SelenideElement waiForVisible() {
-        return waiForVisible(timeout());
+    public SelenideElement waitForVisible() {
+        return waitForVisible(timeout());
     }
 
-    public SelenideElement waiForInvisible(Duration duration) {
+    public SelenideElement waitForInvisible(Duration duration) {
         return findElement().should(Condition.disappear, duration);
     }
 
-    public SelenideElement waiForInvisible() {
-        return waiForInvisible(timeout());
+    public SelenideElement waitForInvisible() {
+        return waitForInvisible(timeout());
     }
 
-    public SelenideElement waiForExist(Duration duration) {
+    public SelenideElement waitForExist(Duration duration) {
         return findElement().should(Condition.exist, duration);
     }
 
-    public SelenideElement waiForExist() {
-        return waiForExist(timeout());
+    public SelenideElement waitForExist() {
+        return waitForExist(timeout());
+    }
+
+    public SelenideElement waitForDisappear(Duration duration) {
+        return findElement().should(Condition.disappear, duration);
+    }
+    public SelenideElement waitForDisappear() {
+        return waitForDisappear(timeout());
     }
 }
