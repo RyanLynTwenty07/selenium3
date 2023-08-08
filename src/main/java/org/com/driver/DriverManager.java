@@ -14,8 +14,7 @@ public class DriverManager {
     static final Map<Long, Driver> threadDriver = new ConcurrentHashMap<>(4);
     static final Map<Long, Configuration> threadConfig = new ConcurrentHashMap<>(4);
 
-    public DriverManager() {
-        Configuration config = new Configuration(true);
+    public DriverManager(Configuration config ) {
         log.debug("Configuration loaded {}", config.toJson());
         long threadId = currentThread().getId();
         this.threadConfig.put(threadId, config);
@@ -71,15 +70,6 @@ public class DriverManager {
         }
         return map.get(threadId);
     }
-
-
-//    private static Driver getCurrentDriver() {
-//        return getDriver(getCurrentThreadId());
-//    }
-//
-//    private static Driver getDriver(long threadId) {
-//        return threadDriver.get(threadId);
-//    }
 
     private static long getCurrentThreadId() {
         return currentThread().getId();

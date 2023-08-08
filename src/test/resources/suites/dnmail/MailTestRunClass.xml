@@ -4,11 +4,11 @@
     <listeners>
         <listener class-name="org.com.testng.TestListener"/>
     </listeners>
-    <parameter name="browser" value="chrome"/>
+    <parameter name="browser" value="edge"/>
     <test name="Run Test Case For DN LogiGear email ">
         <classes>
             <class name="testcases.dnmail.LgiGearMail_TC01"/>
-            <class name="testcases.dnmail.LgiGearMail_TC02"/>
         </classes>
     </test>
+
 </suite>

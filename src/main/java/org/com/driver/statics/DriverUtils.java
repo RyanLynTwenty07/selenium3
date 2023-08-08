@@ -44,4 +44,13 @@ public class DriverUtils {
     public static void open(String url) {
         DriverManager.driver().open(url);
     }
+
+    public static void scrollToTop() {
+        DriverManager.driver().executeJavaScript("window.scrollBy(0,-1500)", "");
+    }
+
+    public static void scrollToBot() {
+        DriverManager.driver().executeJavaScript("window.scrollBy(0,1500)", "");
+    }
+
 }
