@@ -21,11 +21,12 @@ public class Configuration {
     boolean clickViaJs;
 
     public Configuration(boolean initial) {
-        this.platform = Platform.CHROME;
-        this.isHeadless = false;
-        this.pageLoadTimeOut = 60_000;
-        this.isMaximize = true;
-        this.browserVersion =  "114.0.5735.90";
+        if(initial){
+            this.platform = Platform.CHROME;
+            this.isHeadless = false;
+            this.pageLoadTimeOut = 60_000;
+            this.isMaximize = true;
+        }
     }
 
     public SelenideConfig toJson() {

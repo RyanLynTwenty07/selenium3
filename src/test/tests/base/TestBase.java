@@ -18,10 +18,8 @@ public class TestBase {
     @BeforeClass(alwaysRun = true)
     @Parameters("browser")
     public void beforeTest(@Optional String browser) {
-        Configuration config = ConfigLoader.fromJsonFile(CONFIG_FILES.get("chrome"));
-        config.setPlatform(Platform.CHROME);
-        driverManager = new DriverManager();
-        driverManager.setConfig(config);
+        Configuration config = ConfigLoader.fromJsonFile(CONFIG_FILES.get(browser));
+        driverManager = new DriverManager(config);
         driverManager.open(null);
     }
 

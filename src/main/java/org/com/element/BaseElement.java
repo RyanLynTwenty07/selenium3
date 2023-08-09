@@ -1,6 +1,9 @@
 package org.com.element;
 
-import com.codeborne.selenide.*;
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideDriver;
+import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.SetValueOptions;
 import org.com.driver.Configuration;
 import org.com.driver.DriverManager;
 import org.com.driver.statics.DriverUtils;
@@ -8,6 +11,7 @@ import org.openqa.selenium.*;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BaseElement {
 
@@ -82,7 +86,7 @@ public class BaseElement {
     }
 
     public List<SelenideElement> findElements() {
-        return driver().$$(webDriver().findElements(by()));
+        return driver().findAll(by());
     }
 
     public void click() {
@@ -120,10 +124,6 @@ public class BaseElement {
     public void scrollTo() {
         Point location = findElement().getLocation();
         driver().executeJavaScript("window.scrollTo(" + location.getX() + ", " + location.getY() + ')');
-    }
-
-    public void scrollToTop() {
-        driver().executeJavaScript("window.scrollBy(0,-1500)", "");
     }
 
     public boolean isChecked() {
@@ -181,6 +181,14 @@ public class BaseElement {
 
     public String getText() {
         return findElement().getText();
+    }
+
+    public List<String> getAllText() {
+        try {
+            return findElements().stream().map(WebElement::getText).collect(Collectors.toList());
+        } catch (StaleElementReferenceException ex) {
+            return findElements().stream().map(WebElement::getText).collect(Collectors.toList());
+        }
     }
 
     public void scrollToView() {
@@ -283,14 +291,6 @@ public class BaseElement {
 
     public SelenideElement waitForDisappear() {
         return waitForDisappear(timeout());
-    }
-
-    public void checkText(String text, Duration duration) {
-        findElement().shouldHave(Condition.text(text), duration);
-    }
-
-    public void checkText(String text) {
-        checkText(text, timeout());
     }
 
     public void switchNextTab() {
