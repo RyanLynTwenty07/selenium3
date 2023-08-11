@@ -20,7 +20,7 @@ public class TestBase {
     public void beforeTest(@Optional String browser) {
         Configuration config = ConfigLoader.fromJsonFile(CONFIG_FILES.get(browser));
         driverManager = new DriverManager(config);
-        driverManager.open(null);
+        driverManager.open();
     }
 
     @AfterClass(alwaysRun = true)
