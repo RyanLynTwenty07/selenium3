@@ -3,7 +3,6 @@ package base;
 import org.com.driver.ConfigLoader;
 import org.com.driver.Configuration;
 import org.com.driver.DriverManager;
-import org.com.driver.Platform;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Optional;
@@ -16,9 +15,12 @@ public class TestBase {
     private DriverManager driverManager;
 
     @BeforeClass(alwaysRun = true)
-    @Parameters("browser")
-    public void beforeTest(@Optional String browser) {
+    @Parameters({"browser","node"})
+    public void beforeTest(String browser, @Optional String node) {
         Configuration config = ConfigLoader.fromJsonFile(CONFIG_FILES.get(browser));
+        if (node != null) {
+            config.setRemote(node);
+        }
         driverManager = new DriverManager(config);
         driverManager.open();
     }

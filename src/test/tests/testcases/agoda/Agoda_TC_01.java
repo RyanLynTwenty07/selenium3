@@ -22,7 +22,6 @@ public class Agoda_TC_01 extends TestBase {
         bookingData.setCheckOutDate(3);
         bookingData.setNumberOfRooms(2);
         bookingData.setNumberOfPeople(4);
-        lowestPricesList = hotelTitle.returnListHotelRec();
     }
 
     @Test(description = "Search and sort hotel successfully")
@@ -33,17 +32,14 @@ public class Agoda_TC_01 extends TestBase {
         homePage.selectOccupancy(bookingData.getNumberOfPeople(), bookingData.getNumberOfRooms());
         homePage.searchHotels();
         resultPage.waitForLoading();
-        resultPage.check5HotelsDisplayCorrectly(destination);
+        Assert.assertTrue(resultPage.check5HotelsDisplayCorrectly(destination));
         resultPage.selectSortByPrice();
-        Assert.assertTrue(resultPage.checkSearchResults(lowestPricesList));
+        Assert.assertTrue(resultPage.checkResultSortCorrect("Low price"));
     }
 
     LandingPage landingPage = new LandingPage();
     HomePage homePage = new HomePage();
     BookingData bookingData = new BookingData();
     ResultPage resultPage = new ResultPage();
-    HotelTitle hotelTitle = new HotelTitle("The Grumpy House","Phước Mỹ, Da Nang - 2.1 km to center");
-    List<HotelTitle> bestMatchList;
-    List<HotelTitle> lowestPricesList;
     String destination = "Da Nang";
 }

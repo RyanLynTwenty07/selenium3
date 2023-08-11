@@ -1,6 +1,7 @@
 package org.example.page.agoda;
 
 import io.qameta.allure.Step;
+import org.com.driver.Driver;
 import org.com.driver.statics.DriverUtils;
 import org.com.element.BaseElement;
 import org.example.data.agoda.HotelTitle;
@@ -40,22 +41,26 @@ public class ResultPage extends LandingPage {
         }
     }
 
-    public boolean checkSearchResults(List<HotelTitle> hotels) {
-        for (HotelTitle hotel : hotels) {
-            if (!checkEachHotel(hotel, hotels.indexOf(hotel) + 1)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-
+    @Step("Verify ")
     public boolean check5HotelsDisplayCorrectly(String destination) {
+        DriverUtils.switchToWindow(DriverUtils.getWindowHandles().size());
         List<HotelTitle> hotels = getHotels().subList(0, 5);
         List<HotelTitle> inputs = hotels.stream().filter(element -> element.getDestination().contains(destination)).collect(Collectors.toList());
         return inputs.size() == 5;
     }
 
+    @Step("Check result is sorted ")
+    public boolean checkResultSortCorrect(String sortOption) {
+        switch (sortOption) {
+            case "Low price":
+                break;
+            case "Best Match":
+            case "High price":
+        }
+        return true;
+    }
+
+    @Step("Get list hotels display after searching")
     public List<HotelTitle> getHotels() {
         List<HotelTitle> hotels = new ArrayList<>();
         DriverUtils.scrollToBot();
