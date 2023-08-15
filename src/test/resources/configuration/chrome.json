@@ -1,11 +1,11 @@
 {
-  "platform": "chrome",
+  "browser": "chrome",
   "driverVersion": "114.0.5735.90",
   "capabilities": {
     "caps": {
     }
   },
-  "startMaximized": true,
+  "isMaximize": true,
   "baseUrl": "https://www.google.com/",
   "timeout": 60000,
   "pollingInterval": 200

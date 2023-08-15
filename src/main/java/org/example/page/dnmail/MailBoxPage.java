@@ -9,6 +9,7 @@ import org.openqa.selenium.Keys;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.io.File;
 
 public class MailBoxPage extends HomePage {
 
@@ -27,11 +28,12 @@ public class MailBoxPage extends HomePage {
         contentTextArea.enter(Keys.ENTER);
 
         if (data.getImgPath() != null) {
+            File filePath = new File(data.getImgPath());
             DriverUtils.switchToMain();
             insertImgButton.click();
             iframeDialog.switchToFrame();
             subIframeDialog.switchToFrame();
-            chooseFileButton.enter(data.getImgPath());
+            chooseFileButton.enter(filePath.getAbsolutePath());
             insertButton.click();
         }
         DriverUtils.switchToMain();
