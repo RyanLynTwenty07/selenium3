@@ -7,7 +7,7 @@ import org.com.utils.JsonUtils;
 @Data
 public class Configuration {
 
-    private Platform platform;
+    private String browser;
     private boolean isHeadless;
     private long pageLoadTimeOut;
     private String remote;
@@ -19,14 +19,6 @@ public class Configuration {
     private boolean isMaximize;
     private boolean proxyEnabled;
     boolean clickViaJs;
-
-    public Configuration(boolean initial) {
-        this.platform = Platform.CHROME;
-        this.isHeadless = false;
-        this.pageLoadTimeOut = 60_000;
-        this.isMaximize = true;
-        this.browserVersion =  "114.0.5735.90";
-    }
 
     public SelenideConfig toJson() {
         return JsonUtils.fromJSON(JsonUtils.toJSON(this), SelenideConfig.class);
