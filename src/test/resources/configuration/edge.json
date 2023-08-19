@@ -1,10 +1,11 @@
 {
-  "platform": "edge",
+  "browser": "edge",
+  "browserVersion": "115.0.1901.203",
   "capabilities": {
     "caps": {
     }
   },
-  "startMaximized": true,
+  "isMaximize": true,
   "baseUrl": "https://www.google.com/",
   "timeout": 60000,
   "pollingInterval": 200

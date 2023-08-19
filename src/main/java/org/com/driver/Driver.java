@@ -8,6 +8,7 @@ public class Driver {
 
     private Configuration config;
     private SelenideDriver driver;
+    private boolean isAlive;
 
     public Driver(Configuration config) {
         this.config = config;
@@ -39,5 +40,13 @@ public class Driver {
 
     public <T> T executeJavaScript(String jsCode, Object... arguments) {
         return (T) ((JavascriptExecutor) getDriver().getWebDriver()).executeScript(jsCode, arguments);
+    }
+
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public void setAlive(boolean alive) {
+        isAlive = alive;
     }
 }

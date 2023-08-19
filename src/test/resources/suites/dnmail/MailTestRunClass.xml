@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite configfailurepolicy="continue" name="Selenium lv3" parallel="tests" thread-count="2">
+<suite configfailurepolicy="continue" name="Selenium lv3" parallel="none" thread-count="1">
     <listeners>
         <listener class-name="org.com.testng.TestListener"/>
     </listeners>
     <parameter name="browser" value="chrome"/>
     <test name="Run Test Case For DN LogiGear email ">
         <classes>
-            <class name="testcases.dnmail.LgiGearMail_TC01"/>
-            <class name="testcases.dnmail.LgiGearMail_TC02"/>
+            <class name="testcases.dnmail.LogiGearMail_TC01_ComposeAndSaveDraftMailSuccessfully"/>
         </classes>
     </test>
 </suite>

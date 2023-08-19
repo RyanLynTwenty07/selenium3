@@ -1,17 +1,17 @@
 package org.com.element;
 
-import com.codeborne.selenide.*;
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideDriver;
+import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.SetValueOptions;
 import org.com.driver.Configuration;
 import org.com.driver.DriverManager;
 import org.com.driver.statics.DriverUtils;
 import org.openqa.selenium.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
 import java.util.List;
-
-import static org.openqa.selenium.support.ui.ExpectedConditions.*;
+import java.util.stream.Collectors;
 
 public class BaseElement {
 
@@ -86,7 +86,7 @@ public class BaseElement {
     }
 
     public List<SelenideElement> findElements() {
-        return driver().$$(webDriver().findElements(by()));
+        return driver().findAll(by());
     }
 
     public void click() {
@@ -124,10 +124,6 @@ public class BaseElement {
     public void scrollTo() {
         Point location = findElement().getLocation();
         driver().executeJavaScript("window.scrollTo(" + location.getX() + ", " + location.getY() + ')');
-    }
-
-    public void scrollToTop() {
-        driver().executeJavaScript("window.scrollBy(0,-1500)", "");
     }
 
     public boolean isChecked() {
@@ -187,6 +183,14 @@ public class BaseElement {
         return findElement().getText();
     }
 
+    public List<String> getAllText() {
+        try {
+            return findElements().stream().map(WebElement::getText).collect(Collectors.toList());
+        } catch (StaleElementReferenceException ex) {
+            return findElements().stream().map(WebElement::getText).collect(Collectors.toList());
+        }
+    }
+
     public void scrollToView() {
         driver().executeJavaScript("arguments[0].scrollIntoView(true);", findElement());
     }
@@ -220,7 +224,7 @@ public class BaseElement {
      */
     public void enter(String value, boolean clear) {
         if (clear) {
-            this.clear();
+           clear();
         }
         findElement().sendKeys(value);
     }
@@ -257,27 +261,39 @@ public class BaseElement {
         return findElement().should(Condition.and("Can be clickable", Condition.visible, Condition.enabled), duration);
     }
 
-    public SelenideElement waiForVisible(Duration duration) {
+    public SelenideElement waitForVisible(Duration duration) {
         return findElement().should(Condition.visible, duration);
     }
 
-    public SelenideElement waiForVisible() {
-        return waiForVisible(timeout());
+    public SelenideElement waitForVisible() {
+        return waitForVisible(timeout());
     }
 
-    public SelenideElement waiForInvisible(Duration duration) {
+    public SelenideElement waitForInvisible(Duration duration) {
         return findElement().should(Condition.disappear, duration);
     }
 
-    public SelenideElement waiForInvisible() {
-        return waiForInvisible(timeout());
+    public SelenideElement waitForInvisible() {
+        return waitForInvisible(timeout());
     }
 
-    public SelenideElement waiForExist(Duration duration) {
+    public SelenideElement waitForExist(Duration duration) {
         return findElement().should(Condition.exist, duration);
     }
 
-    public SelenideElement waiForExist() {
-        return waiForExist(timeout());
+    public SelenideElement waitForExist() {
+        return waitForExist(timeout());
+    }
+
+    public SelenideElement waitForDisappear(Duration duration) {
+        return findElement().should(Condition.disappear, duration);
+    }
+
+    public SelenideElement waitForDisappear() {
+        return waitForDisappear(timeout());
+    }
+
+    public void switchNextTab() {
+        driver().switchTo().window(1);
     }
 }
