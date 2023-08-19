@@ -18,6 +18,7 @@ public class HomePage extends LandingPage {
         placeTextBox.waitForVisible();
         placeTextBox.enter(place, true);
         placeOptionItem.set(place);
+        placeOptionItem.waitForVisible();
         placeOptionItem.click();
         placeBox.pressEscape();
     }
@@ -77,7 +78,7 @@ public class HomePage extends LandingPage {
     protected BaseElement checkInBox = new BaseElement("//div[@id='check-in-box']");
     protected BaseElement occupancyBox = new BaseElement("//div[@id='occupancy-box']");
     protected BaseElement placeTextBox = new BaseElement("//div[@id='autocomplete-box']//input[@id='textInput']");
-    protected BaseElement placeOptionItem = new BaseElement("//li[@class='Suggestion Suggestion__categoryName' and @data-text='%s']");
+    protected BaseElement placeOptionItem = new BaseElement("(//span[@data-selenium='suggestion-text-highlight' and text()='%s'])[1]");
     protected BaseElement datePickerItem = new BaseElement("//div[@aria-label='%s']");
     protected BaseElement occupancyRoomLabel = new BaseElement("//div[@data-selenium='desktop-occ-room-value']/h3");
     protected BaseElement occupancyRoomPlusButton = new BaseElement("//div[@data-element-name='occupancy-selector-panel-rooms' and @data-selenium='plus']");

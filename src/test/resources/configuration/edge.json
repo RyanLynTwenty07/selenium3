@@ -1,5 +1,6 @@
 {
   "browser": "edge",
+  "browserVersion": "115.0.1901.203",
   "capabilities": {
     "caps": {
     }

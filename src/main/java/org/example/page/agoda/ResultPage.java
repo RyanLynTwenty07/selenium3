@@ -1,5 +1,7 @@
 package org.example.page.agoda;
 
+import io.qameta.allure.Allure;
+import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 import org.com.driver.Driver;
 import org.com.driver.statics.DriverUtils;
@@ -32,6 +34,7 @@ public class ResultPage extends LandingPage {
     @Step("Select sort by price")
     public void selectSortByPrice() {
         tourButton.switchNextTab();
+        DriverUtils.waitForPageLoad();
         if (searchSortButton.isDisplayed()) {
             openSearchSortDropdown();
             sortByPriceDropDownButton.waitForClickable();
@@ -41,15 +44,19 @@ public class ResultPage extends LandingPage {
         }
     }
 
-    @Step("Verify ")
+    @Step("Verify Point: Check the 5 results latest match with destination: {destination}")
     public boolean check5HotelsDisplayCorrectly(String destination) {
         DriverUtils.switchToWindow(DriverUtils.getWindowHandles().size());
-        List<HotelTitle> hotels = getHotels().subList(0, 5);
-        List<HotelTitle> inputs = hotels.stream().filter(element -> element.getDestination().contains(destination)).collect(Collectors.toList());
-        return inputs.size() == 5;
+        List<HotelTitle> hotels = getHotels();
+        int total = hotels.size();
+        List<HotelTitle> _5hotels = total > 5 ? hotels.subList(0, 5) : hotels;
+        List<HotelTitle> hotelsMatched = _5hotels.stream().filter(element -> element.getDestination().contains(destination)).collect(Collectors.toList());
+        Allure.step("List hotels display after searching: " + hotels);
+        Allure.step("List hotels meet with condition: " + hotelsMatched);
+        return hotelsMatched.size() > 0 && _5hotels.equals(hotelsMatched);
     }
 
-    @Step("Check result is sorted ")
+    @Step("Check result is sorted by {sortOption}")
     public boolean checkResultSortCorrect(String sortOption) {
         switch (sortOption) {
             case "Low price":
@@ -60,7 +67,6 @@ public class ResultPage extends LandingPage {
         return true;
     }
 
-    @Step("Get list hotels display after searching")
     public List<HotelTitle> getHotels() {
         List<HotelTitle> hotels = new ArrayList<>();
         DriverUtils.scrollToBot();
@@ -71,6 +77,7 @@ public class ResultPage extends LandingPage {
             HotelTitle hotel = new HotelTitle(name.get(i), destination.getText());
             hotels.add(hotel);
         }
+
         return hotels;
     }
 

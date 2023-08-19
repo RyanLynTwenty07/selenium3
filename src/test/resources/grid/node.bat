@@ -7,6 +7,6 @@ for /f "tokens=*" %%a in (config.ini) do (
     )
 )
 
-java -Dwebdriver.edge.driver="../drivers/win/MicrosoftWebDriver.exe" -Dwebdriver.chrome.driver="C:\Users\linh.nguyen\.cache\selenium\chromedriver\win32\114.0.5735.90/chromedriver.exe" -jar selenium-server-4.11.0.jar node --hub http://%hub_ip%:4444/grid/register --port %port%
+java -Dwebdriver.edge.driver="C:\Users\linh.nguyen\.cache\selenium\msedgedriver\win64\115.0.1901.200\msedgedriver.exe" -Dwebdriver.chrome.driver="C:\Users\linh.nguyen\.cache\selenium\chromedriver\win32\114.0.5735.90/chromedriver.exe" -jar selenium-server-4.11.0.jar node --hub http://%hub_ip%:4444/grid/register --port %port%
 
 pause

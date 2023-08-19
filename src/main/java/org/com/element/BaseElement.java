@@ -224,7 +224,7 @@ public class BaseElement {
      */
     public void enter(String value, boolean clear) {
         if (clear) {
-            this.clear();
+           clear();
         }
         findElement().sendKeys(value);
     }

@@ -1,5 +1,7 @@
 package org.com.driver;
 
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,7 +16,7 @@ public class DriverManager {
     static final Map<Long, Driver> threadDriver = new ConcurrentHashMap<>(4);
     static final Map<Long, Configuration> threadConfig = new ConcurrentHashMap<>(4);
 
-    public DriverManager(Configuration config ) {
+    public DriverManager(Configuration config) {
         log.debug("Configuration loaded {}", config.toJson());
         long threadId = currentThread().getId();
         this.threadConfig.put(threadId, config);
@@ -35,7 +37,7 @@ public class DriverManager {
 
     public void open(String url) {
         initDriver();
-        if(url!=null){
+        if (url != null) {
             driver().open(url);
         }
     }
@@ -68,6 +70,7 @@ public class DriverManager {
             throw new IllegalStateException(
                     "No web driver is bound to current thread: " + threadId + ". You need to call open(url) first.");
         }
+        map.get(threadId).setAlive(true);
         return map.get(threadId);
     }
 

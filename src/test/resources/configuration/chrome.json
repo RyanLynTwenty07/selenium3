@@ -1,12 +1,12 @@
 {
   "browser": "chrome",
-  "driverVersion": "114.0.5735.90",
+  "browserVersion": "116.0.5845.96",
   "capabilities": {
     "caps": {
     }
   },
   "isMaximize": true,
   "baseUrl": "https://www.google.com/",
-  "timeout": 60000,
+  "timeOut": 60000,
   "pollingInterval": 200
 }
