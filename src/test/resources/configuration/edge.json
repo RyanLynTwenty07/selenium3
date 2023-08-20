@@ -7,6 +7,6 @@
   },
   "isMaximize": true,
   "baseUrl": "https://www.google.com/",
-  "timeout": 60000,
+  "timeOut": 60000,
   "pollingInterval": 200
 }

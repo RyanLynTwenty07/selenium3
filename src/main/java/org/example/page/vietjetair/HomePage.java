@@ -1,5 +1,7 @@
 package org.example.page.vietjetair;
 
+import io.qameta.allure.Step;
+import org.com.driver.statics.DriverUtils;
 import org.example.data.vj.SearchTicketData;
 import org.com.element.BaseElement;
 import org.example.page.general.IHomePage;
@@ -15,34 +17,47 @@ public class HomePage implements IHomePage {
 
     }
 
+    @Step("Search Ticket")
     public void searchTickets(SearchTicketData data) {
+        DriverUtils.waitForPageLoad();
         if (data.getTicketType().equals("Return")) {
-
+            ticketTypeButton.click("Return");
+            selectDatePicker(data.getDepartureDate());
+            selectDatePicker(data.getReturnDate());
+            dropDownItem.click(data.getOrigination());
+            dropDownItem.click(data.getDepartureDate());
         }
     }
 
-    public void selectDatePicker(String date) {
+    public void selectDatePicker(LocalDate date) {
+        //div[@class='rdrMonth'][div[.='September 2023']]//button[not(contains(@class,'rdrDayPassive'))]/span[.='1']
         BaseElement currentMonth = new BaseElement("//div[@class='rdrMonthName' and text()='%s']");
         BaseElement monthTitle = new BaseElement("//div[@class='rdrMonthName']");
-        BaseElement nextArrow = new BaseElement("");
-        BaseElement previousArrow = new BaseElement("");
-        BaseElement day = new BaseElement("");
-        LocalDate ld = LocalDate.parse(date, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-        currentMonth.set(ld.format(DateTimeFormatter.ofPattern("MMMM yyyy")));
-
-
+        BaseElement nextArrow = new BaseElement("class=rdrNextPrevButton rdrNextButton");
+        BaseElement previousArrow = new BaseElement("class=rdrNextPrevButton rdrPprevButton");
+        BaseElement day = new BaseElement("//div[@class='rdrMonth'][div[.='%s']]//button[not(contains(@class,'rdrDayPassive'))]/span[.='%s']");
+        String title = date.format(DateTimeFormatter.ofPattern("MMMM yyyy"));
+        currentMonth.set(title);
+        int dayNumber = date.getDayOfMonth();
+        int inputMonth = date.getMonthValue();
+        int inputYear = date.getYear();
         while (!currentMonth.isDisplayed()) {
-            nextArrow.click();
-            int month = ld.getMonthValue();
             int calMonth = Month.valueOf(monthTitle.getText().split(" ")[0]).getValue();
-            Integer y = Integer.valueOf(monthTitle.getText().split(" ")[1]);
-            if (month != calMonth) {
-
+            Integer calYear = Integer.valueOf(monthTitle.getText().split(" ")[1]);
+            if (inputMonth != calMonth || inputYear != calYear) {
+                if (inputMonth > calMonth) {
+                    nextArrow.click();
+                } else {
+                    previousArrow.click();
+                }
             }
         }
-
-        String dayNumber;
+        day.click(title, dayNumber);
     }
 
-    protected BaseElement ticketType = new BaseElement("(//span[.='%s']/preceding-sibling::span[1]//input)[1]");
+    protected BaseElement ticketTypeButton = new BaseElement("(//span[.='%s']/preceding-sibling::span[1]//input)[1]");
+    protected BaseElement toTextbox = new BaseElement("//input[@id='arrivalPlaceDesktop']");
+    protected BaseElement fromTextbox = new BaseElement("//div[label[.='From']]/div/input");
+    protected BaseElement continueButton = new BaseElement("//span[text()='Continue']");
+    protected BaseElement dropDownItem = new BaseElement("//div[contains(@class,'MuiBox-root')]//div[.='%s']");
 }

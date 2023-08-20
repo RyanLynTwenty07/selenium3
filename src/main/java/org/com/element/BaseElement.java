@@ -97,6 +97,11 @@ public class BaseElement {
         }
     }
 
+    public void click(Object... args) {
+        set(args);
+        click();
+    }
+
     public void click(int offsetX, int offsetY) {
         click(findElement(), offsetX, offsetY);
     }
