@@ -12,8 +12,8 @@ public class LandingPage implements IHomePage {
     }
 
     public void waitForLoadingState() {
-        loadingBox.waitForDisappear();
+        loadingPopup.waitForDisappear();
     }
 
-    protected BaseElement loadingBox = new BaseElement("//*[@id='ModalLoadingSpinner']");
+    BaseElement loadingPopup = new BaseElement("//*[@id='ModalLoadingSpinner']");
 }

@@ -5,6 +5,7 @@ import lombok.Data;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
+import java.util.List;
 
 @Data
 public class BookingData {
@@ -14,7 +15,9 @@ public class BookingData {
     private LocalDate checkOutDate;
     private int numberOfPeople;
     private int numberOfRooms;
-    private int price;
+    private int minPrice;
+    private int maxPrice;
+    private List<String> filters;
 
     public void getNextFridayAsBookingDate() {
         LocalDate today = LocalDate.now();

@@ -73,18 +73,18 @@ public class HomePage extends LandingPage {
         promoNoThankButton.click();
     }
 
-    protected BaseElement placeBox = new BaseElement("//div[@id='autocomplete-box']");
-    protected BaseElement checkInBox = new BaseElement("//div[@id='check-in-box']");
-    protected BaseElement occupancyBox = new BaseElement("//div[@id='occupancy-box']");
-    protected BaseElement placeTextBox = new BaseElement("//div[@id='autocomplete-box']//input[@id='textInput']");
-    protected BaseElement placeOptionItem = new BaseElement("//li[@class='Suggestion Suggestion__categoryName' and @data-text='%s']");
-    protected BaseElement datePickerItem = new BaseElement("//div[@aria-label='%s']");
-    protected BaseElement occupancyRoomLabel = new BaseElement("//div[@data-selenium='desktop-occ-room-value']/h3");
-    protected BaseElement occupancyRoomPlusButton = new BaseElement("//div[@data-element-name='occupancy-selector-panel-rooms' and @data-selenium='plus']");
-    protected BaseElement occupancyRoomMinusButton = new BaseElement("//div[@data-element-name='occupancy-selector-panel-rooms' and @data-selenium='minus']");
-    protected BaseElement occupancyPeopleLabel = new BaseElement("//div[@data-selenium='desktop-occ-adult-value']/h3");
-    protected BaseElement occupancyPeoplePlusButton = new BaseElement("//div[@data-element-name='occupancy-selector-panel-adult' and @data-selenium='plus']");
-    protected BaseElement occupancyPeopleMinusButton = new BaseElement("//div[@data-element-name='occupancy-selector-panel-adult' and @data-selenium='minus']");
-    protected BaseElement searchButton = new BaseElement("//button[@data-selenium='searchButton']");
-    protected BaseElement promoNoThankButton = new BaseElement("//button[text()='No thanks']");
+    BaseElement placeBox = new BaseElement("//div[@id='autocomplete-box']");
+    BaseElement checkInBox = new BaseElement("//div[@id='check-in-box']");
+    BaseElement occupancyBox = new BaseElement("//div[@id='occupancy-box']");
+    BaseElement placeTextBox = new BaseElement("//div[@id='autocomplete-box']//input[@id='textInput']");
+    BaseElement placeOptionItem = new BaseElement("//li[@class='Suggestion Suggestion__categoryName' and @data-text='%s']");
+    BaseElement datePickerItem = new BaseElement("//div[@aria-label='%s']");
+    BaseElement occupancyRoomLabel = new BaseElement("//div[@data-selenium='desktop-occ-room-value']/h3");
+    BaseElement occupancyRoomPlusButton = new BaseElement("//div[@data-element-name='occupancy-selector-panel-rooms' and @data-selenium='plus']");
+    BaseElement occupancyRoomMinusButton = new BaseElement("//div[@data-element-name='occupancy-selector-panel-rooms' and @data-selenium='minus']");
+    BaseElement occupancyPeopleLabel = new BaseElement("//div[@data-selenium='desktop-occ-adult-value']/h3");
+    BaseElement occupancyPeoplePlusButton = new BaseElement("//div[@data-element-name='occupancy-selector-panel-adult' and @data-selenium='plus']");
+    BaseElement occupancyPeopleMinusButton = new BaseElement("//div[@data-element-name='occupancy-selector-panel-adult' and @data-selenium='minus']");
+    BaseElement searchButton = new BaseElement("//button[@data-selenium='searchButton']");
+    BaseElement promoNoThankButton = new BaseElement("//button[text()='No thanks']");
 }

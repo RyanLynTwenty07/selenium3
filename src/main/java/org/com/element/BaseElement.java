@@ -296,4 +296,8 @@ public class BaseElement {
     public void switchNextTab() {
         driver().switchTo().window(1);
     }
+
+    public void hover() {
+        findElement().hover();
+    }
 }
