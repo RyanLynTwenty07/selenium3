@@ -57,11 +57,11 @@
         </plugins>
     </build>
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/com.codeborne/selenide -->
         <dependency>
             <groupId>com.codeborne</groupId>
             <artifactId>selenide</artifactId>
-            <version>6.15.0</version>
-            <scope>test</scope>
+            <version>6.17.0</version>
         </dependency>
 
         <dependency>
@@ -93,12 +93,13 @@
             <artifactId>slf4j-simple</artifactId>
             <version>1.7.30</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.codeborne/selenide-core -->
         <dependency>
             <groupId>com.codeborne</groupId>
             <artifactId>selenide-core</artifactId>
-            <version>6.15.0</version>
-            <scope>compile</scope>
+            <version>6.17.0</version>
         </dependency>
+
 
         <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-selenide -->
         <dependency>
