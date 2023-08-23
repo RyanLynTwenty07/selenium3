@@ -9,13 +9,13 @@ public class Configuration {
 
     private String browser;
     private boolean isHeadless;
-    private long pageLoadTimeOut;
     private String remote;
     private String browserSize;
     private String browserVersion;
     private String baseUrl;
     private long timeOut;
     private long pollingInterval;
+    private long pageLoadTimeout;
     private boolean isMaximize;
     private boolean proxyEnabled;
     boolean clickViaJs;

@@ -24,6 +24,11 @@ public class AllureStepListener implements StepLifecycleListener {
 
     @Override
     public void afterStepUpdate(StepResult result) {
+
+    }
+
+    @Override
+    public void beforeStepStop(StepResult result) {
         if (result.getStatus().equals(Status.FAILED)) {
             if (DriverUtils.isAlive()) {
                 ByteArrayInputStream input = new ByteArrayInputStream(DriverUtils.takeScreenShot(OutputType.BYTES));

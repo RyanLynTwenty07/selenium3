@@ -8,6 +8,8 @@
     <test name="Run Test Case For Agoda">
         <classes>
             <class name="testcases.agoda.Agoda_TC_01"/>
+            <class name="testcases.agoda.Agoda_TC_02"/>
+            <class name="testcases.agoda.Agoda_TC_03"/>
         </classes>
     </test>
 </suite>

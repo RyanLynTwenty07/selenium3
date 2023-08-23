@@ -1,0 +1,28 @@
+{
+  "searchTicketData": [
+    {
+      "filterCode": "en",
+      "ticketType": "Return",
+      "origination": "Ho Chi Minh",
+      "destination": "Ha Noi",
+      "passenger": {
+        "adults": 2,
+        "adults": 0,
+        "adults": 0
+      },
+      "lowestFare": false
+    },
+    {
+      "filterCode": "vi",
+      "ticketType": "Return",
+      "origination": "Tp. Hồ Chí Minh",
+      "destination": "Hà Nội",
+      "passenger": {
+        "adults": 2,
+        "children": 0,
+        "infants": 0
+      },
+      "lowestFare": true
+    }
+  ]
+}

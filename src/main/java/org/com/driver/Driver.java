@@ -1,8 +1,13 @@
 package org.com.driver;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideDriver;
+import lombok.SneakyThrows;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.interactions.Actions;
+
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 public class Driver {
 
@@ -15,9 +20,12 @@ public class Driver {
         this.driver = new SelenideDriver(config.toJson());
     }
 
+    @SneakyThrows
     public void open(String url) {
         this.driver.open(url);
+        this.driver.getWebDriver().manage().timeouts().pageLoadTimeout(Duration.ofMillis(config.getPageLoadTimeout()));
         if (config.isMaximize()) {
+            Thread.sleep(2_000);
             this.driver.getWebDriver().manage().window().maximize();
         }
     }

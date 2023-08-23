@@ -8,6 +8,7 @@
     <test name="Run Test Case For DN LogiGear email ">
         <classes>
             <class name="testcases.dnmail.LogiGearMail_TC01_ComposeAndSaveDraftMailSuccessfully"/>
+            <class name="testcases.dnmail.LogiGearMail_TC02_ComposeAndSentDraftMailSuccessfully"/>
         </classes>
     </test>
 </suite>

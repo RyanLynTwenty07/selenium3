@@ -1,10 +1,10 @@
 package org.example.data;
 
+
 public enum PageName {
 
     DN_LGG_MAIL("https://dnmail.logigear.com/"),
-    GOOGLE(""),
-    VIET_JET_AIR("https://www.vietjetair.com/en/"),
+    VIET_JET_AIR("https://www.vietjetair.com/%s/"),
     AGODA("https://www.agoda.com/");
 
     PageName(String text) {

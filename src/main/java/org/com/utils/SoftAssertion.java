@@ -4,6 +4,7 @@ import io.qameta.allure.Allure;
 import io.qameta.allure.model.Status;
 import io.qameta.allure.model.StepResult;
 import org.com.driver.statics.DriverUtils;
+import org.com.report.Logger;
 import org.openqa.selenium.OutputType;
 import org.testng.asserts.IAssert;
 import org.testng.collections.Maps;
@@ -30,7 +31,7 @@ public class SoftAssertion extends Assertion {
             m_errors = Maps.newLinkedHashMap();
             throw new AssertionError(tempErrors);
         } else {
-            Allure.step(message, Status.PASSED);
+            Logger.info(message);
         }
     }
 
@@ -40,15 +41,12 @@ public class SoftAssertion extends Assertion {
         try {
             a.doAssert();
             onAssertSuccess(a);
-            String message = "↪ PASSED - Expected: %s - Actual: %s";
-            Allure.step(String.format(message, a.getActual(), a.getExpected()));
+            String message = "%s ↪ PASSED - Expected: %s - Actual: %s";
+            Logger.info(String.format(message, a.getMessage(), a.getActual(), a.getExpected()));
         } catch (AssertionError ex) {
             onAssertFailure(a, ex);
             m_errors.put(ex, a);
-            Allure.step("↪ FAILED - " + getErrorDetails(ex), () -> {
-                Allure.getLifecycle().updateStep(stepResult -> stepResult.setStatus(Status.FAILED));
-                Allure.getLifecycle().stopStep();
-            });
+            Logger.info(a.getMessage() + "↪ FAILED - Expected: " + a.getExpected() + " - Actual: " + a.getActual(), Status.FAILED);
         } finally {
             onAfterAssert(a);
         }

@@ -5,9 +5,10 @@
         <listener class-name="org.com.testng.TestListener"/>
     </listeners>
     <parameter name="browser" value="chrome"/>
-    <test name="Run Test Case For DN LogiGear email ">
+    <test name="Run Test Case For ViejetAir">
         <classes>
-            <class name="testcases.vietjetair.VietjetAir_TC01"/>
+<!--            <class name="testcases.vietjetair.VietjetAir_TC01"/>-->
+            <class name="testcases.vietjetair.VietJetAir_TC02"/>
         </classes>
     </test>
 </suite>
