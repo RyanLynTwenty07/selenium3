@@ -4,28 +4,41 @@ import io.qameta.allure.Allure;
 import io.qameta.allure.model.Status;
 
 public class Assert {
+
     public static void assertTrue(boolean condition) {
+        assertTrue(condition, "");
+    }
+
+    public static void assertTrue(boolean condition, String messages) {
         try {
-            softAssertion.assertTrue(condition);
+            softAssertion.assertTrue(condition, messages);
+        } catch (AssertionError ex) {
+            throw ex;
+        }
+    }
+
+    public static <T> void assertEquals(T actual, T expected, String message) {
+        try {
+            softAssertion.assertEquals(actual, expected, message);
         } catch (AssertionError ex) {
             throw ex;
         }
     }
 
     public static <T> void assertEquals(T actual, T expected) {
+        assertEquals(actual, expected, "");
+    }
+
+    public static void assertEquals(String actual, String expected, String message) {
         try {
-            softAssertion.assertEquals(actual, expected);
+            softAssertion.assertEquals(actual, expected, message);
         } catch (AssertionError ex) {
             throw ex;
         }
     }
 
     public static void assertEquals(String actual, String expected) {
-        try {
-            softAssertion.assertEquals(actual, expected);
-        } catch (AssertionError ex) {
-            throw ex;
-        }
+        assertEquals(actual, expected, "");
     }
 
     public static void assertFalse(boolean condition) {

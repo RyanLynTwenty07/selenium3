@@ -1,14 +1,24 @@
 package org.example.page.general;
 
-import io.qameta.allure.Step;
 import org.com.driver.statics.DriverUtils;
+import org.com.report.Logger;
+import org.com.utils.Common;
 import org.example.data.PageName;
 
 public interface IHomePage {
 
-    @Step("Navigate to {page} page")
     default void openPage(PageName page) {
-        DriverUtils.open(page.toString());
+        String url;
+        switch (page) {
+            case VIET_JET_AIR:
+                url = String.format(page.toString(), Common.language);
+                break;
+            default:
+                url = page.toString();
+                break;
+        }
+        Logger.info("Navigate to " + url);
+        DriverUtils.open(url);
     }
 
     void clickButton(String button);

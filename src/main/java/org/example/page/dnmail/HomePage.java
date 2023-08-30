@@ -16,14 +16,12 @@ public class HomePage implements IHomePage {
         mailTree.click();
     }
 
-    @Step("Verify Point: Check mail with subject {subject} exist in Draft mail")
     public boolean checkMailDisplayInDraftFolder(String subject) {
         title.set(subject);
         title.waitForVisible();
         return title.isDisplayed();
     }
 
-    @Step("Verify Point: Check attachment display in mail")
     public boolean isAttachmentDisplayedInMail(String subject) {
         attachment.set(subject);
         attachment.waitForVisible();

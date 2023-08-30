@@ -1,17 +1,27 @@
 package org.example.page.agoda;
 
 import io.qameta.allure.Step;
+import io.qameta.allure.model.Status;
+import org.com.driver.statics.DriverUtils;
 import org.com.element.BaseElement;
+import org.com.report.Logger;
+import org.com.utils.Assert;
+import org.com.utils.Common;
 import org.com.utils.DateUtils;
+import org.example.data.agoda.Hotel;
+import org.example.page.general.IHomePage;
 
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
-public class HomePage extends LandingPage {
+public class HomePage implements IHomePage {
 
-    @Step("Select place: {place}")
     public void selectPlace(String place) {
+        Logger.info("Select place: " + place);
         discardPromoMessage();
         placeBox.waitForExist();
         placeBox.click();
@@ -23,24 +33,43 @@ public class HomePage extends LandingPage {
         placeBox.pressEscape();
     }
 
-    private void selectCheckInDate(String checkInDate) {
-        datePickerItem.set(checkInDate);
+    @Override
+    public void clickButton(String button) {
+        // custom action
+    }
+
+    public void selectDatePicker(LocalDate date) {
+        BaseElement previousNarrowButton = new BaseElement("//button[@data-selenium='calendar-previous-month-button']");
+        BaseElement nextNarrowButton = new BaseElement("//button[@data-selenium='calendar-next-month-button']");
+        BaseElement title = new BaseElement("//div[@class='DayPicker-Caption DayPicker-Caption-Wide' and text()='%s']");
+        BaseElement monthLabel = new BaseElement("(//div[@class='DayPicker-Caption DayPicker-Caption-Wide'])[1]");
+        DriverUtils.waitForPageLoad();
+
+        int month = date.getMonth().getValue();
+        String header = date.format(DateTimeFormatter.ofPattern("MMMM yyyy"));
+        title.set(header);
+
+        while (!title.isDisplayed()) {
+            int dpMonth = Month.valueOf(monthLabel.getText().split(" ")[0].toUpperCase()).getValue();
+            if (month < dpMonth) {
+                previousNarrowButton.waitForExist();
+                previousNarrowButton.click();
+            } else {
+                nextNarrowButton.waitForExist();
+                nextNarrowButton.click();
+            }
+        }
+        datePickerItem.set(date.format(DateTimeFormatter.ofPattern("EEE MMM dd YYYY")));
         datePickerItem.click();
     }
 
-    private void selectCheckOutDate(String checkOutDate) {
-        datePickerItem.set(checkOutDate);
-        datePickerItem.click();
-    }
-
-    @Step("Select check in date: {checkIn} and check out date: {checkOut}")
     public void selectCheckInAndCheckOutDate(LocalDate checkIn, LocalDate checkOut) {
         checkInBox.click();
-        SimpleDateFormat datePickerFormat = new SimpleDateFormat("EEE MMM dd YYYY");
-        String checkInDate = datePickerFormat.format(DateUtils.asDate(checkIn));
-        String checkOutDate = datePickerFormat.format(DateUtils.asDate(checkOut));
-        selectCheckInDate(checkInDate);
-        selectCheckOutDate(checkOutDate);
+        DriverUtils.waitForPageLoad();
+        Logger.info("Select Check In Date: " + checkIn);
+        selectDatePicker(checkIn);
+        Logger.info("Select Check Out Date: " + checkOut);
+        selectDatePicker(checkOut);
         checkInBox.pressEscape();
     }
 
@@ -56,24 +85,51 @@ public class HomePage extends LandingPage {
         }
     }
 
-    @Step("Select: {people} people and {room} rooms")
     public void selectOccupancy(int people, int room) {
         occupancyBox.click();
+        Logger.info("Select People Numbers: " + people);
         selectPeople(people);
+        Logger.info("Select Room Numbers: " + room);
         selectRooms(room);
         occupancyBox.pressEscape();
     }
 
-    @Step("Search hotels")
     public void searchHotels() {
+        Logger.info("Click Search Hotels");
         searchButton.click();
+        loadingSpinner.waitForDisappear();
     }
 
-    private void discardPromoMessage() {
+    public void discardPromoMessage() {
         promoNoThankButton.waitForVisible(Duration.ofMinutes(1));
         promoNoThankButton.click();
     }
 
+    public boolean checkHotelDisplayCorrectDestination(List<Hotel> hotels, String destination) {
+        for (int i = 0; i < hotels.size(); i++) {
+            Hotel hotel = hotels.get(i);
+            if (!hotel.getDestination().contains(destination)) {
+                Logger.info("Hotel " + i + ": " + hotel.getDestination(), Status.FAILED);
+                return false;
+            }
+            Logger.info("Hotel " + i + ": " + hotel.getDestination());
+        }
+        return true;
+    }
+
+    public boolean checkHotelsMeetRangePriceFiltered(List<Hotel> hotels, double min, double max) {
+        for (int i = 0; i < hotels.size(); i++) {
+            Hotel hotel = hotels.get(i);
+            Logger.info("Hotel " + hotel.toString());
+            boolean checked = hotel.getPrice() <= max || hotel.getPrice() >= min;
+            if (!checked) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    protected BaseElement loadingSpinner = new BaseElement("//div[@id='ModalLoadingSpinner']");
     protected BaseElement placeBox = new BaseElement("//div[@id='autocomplete-box']");
     protected BaseElement checkInBox = new BaseElement("//div[@id='check-in-box']");
     protected BaseElement occupancyBox = new BaseElement("//div[@id='occupancy-box']");
@@ -88,4 +144,5 @@ public class HomePage extends LandingPage {
     protected BaseElement occupancyPeopleMinusButton = new BaseElement("//div[@data-element-name='occupancy-selector-panel-adult' and @data-selenium='minus']");
     protected BaseElement searchButton = new BaseElement("//button[@data-selenium='searchButton']");
     protected BaseElement promoNoThankButton = new BaseElement("//button[text()='No thanks']");
+    protected BaseElement loadingBox = new BaseElement("//*[@id='ModalLoadingSpinner']");
 }

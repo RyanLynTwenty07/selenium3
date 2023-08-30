@@ -48,6 +48,8 @@ public class BaseElement {
                 return By.name(this.locatorValue);
             case "className":
                 return By.className(this.locatorValue);
+            case "class":
+                return By.xpath(String.format("//*[@class='%s']", this.locatorValue.split("class=")[0]));
             default:
                 this.locatorValue = locator;
                 return By.xpath(this.locatorValue);
@@ -86,7 +88,7 @@ public class BaseElement {
     }
 
     public List<SelenideElement> findElements() {
-        return driver().findAll(by());
+        return driver().findAll(by()).stream().map(element->element.should(Condition.exist)).collect(Collectors.toList());
     }
 
     public void click() {
@@ -99,6 +101,12 @@ public class BaseElement {
 
     public void click(int offsetX, int offsetY) {
         click(findElement(), offsetX, offsetY);
+    }
+
+    public void click(int times) {
+        for (int i = 0; i < times; i++) {
+            click();
+        }
     }
 
     public void pressEnter() {
@@ -224,9 +232,9 @@ public class BaseElement {
      */
     public void enter(String value, boolean clear) {
         if (clear) {
-           clear();
+            clear();
         }
-        findElement().sendKeys(value);
+        enter(value);
     }
 
     public void switchToFrame() {
@@ -293,7 +301,7 @@ public class BaseElement {
         return waitForDisappear(timeout());
     }
 
-    public void switchNextTab() {
-        driver().switchTo().window(1);
+    public void hover() {
+        findElement().hover();
     }
 }
