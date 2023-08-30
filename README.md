@@ -16,14 +16,17 @@
 7. Paralell
 9. Distributed testing (Selenium Grid)
 10. CI/CD
-   - Migrate and associate with ADO 
+   - associate with Jenkins 
 11. Report
     Using Allure Report
     User should be installed allure dependencies to generate report
+    After installing Allure, User can run viewReport.bat to see report
 
 # Set up Environment
 1. Install JDK
 2. Install InteliJi
+3. Install Allure
+4. Install Jenkins
 
 # Configure to run scripts
 1. To run script for EX 1: VietJetAir
@@ -33,7 +36,7 @@ Please set environment variable:
 username ="", 
 password =""
 
-# Associate with AzureDevops
-   - Migrate and associate test run with ADO
+# Associate with Jenkins
+   - Migrate and associate test run with Jenkins
    - How to set up CI Tool run test by schedule
    - Send the email report to configured email addresses
