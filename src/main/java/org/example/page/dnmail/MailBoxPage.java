@@ -13,7 +13,6 @@ import java.io.File;
 
 public class MailBoxPage extends HomePage {
 
-    @Step("Compose email to send {data}")
     public void composeEmail(EmailData data) {
         newButton.click();
         DriverUtils.switchToWindow(DriverUtils.getWindowHandles().size());

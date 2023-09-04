@@ -5,6 +5,7 @@ import org.com.driver.statics.DriverUtils;
 import org.com.element.BaseElement;
 import org.com.report.Logger;
 import org.example.data.agoda.Hotel;
+import org.example.data.agoda.ReviewData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -140,7 +141,6 @@ public class ResultPage extends HomePage {
         loadingSpinner.waitForDisappear();
     }
 
-
     public void setFilterCheckBox(String option) {
         DriverUtils.waitForPageLoad();
         Logger.info("Check Option " + option);
@@ -174,6 +174,21 @@ public class ResultPage extends HomePage {
         hotelReviewScoreLabel.hover();
     }
 
+    public List<ReviewData> getReviewScore(List<String> reviewName) {
+        List<ReviewData> reviewDataList = new ArrayList<>();
+        for (String rv : reviewName) {
+            ReviewData review = new ReviewData();
+            reviewBarItemsScore.set(rv);
+            review.setReviewCriteria(rv);
+            double score = reviewBarItemsScore.getText().trim().isEmpty() ? 0 :
+                    Double.valueOf(reviewBarItemsScore.getText().trim());
+            review.setScore(score);
+            reviewDataList.add(review);
+        }
+        Logger.info("List Review and Score: " + reviewDataList);
+        return reviewDataList;
+    }
+
     public boolean checkReviewDetailPopupLabelDisplay(String label) {
         detailReviewPopup.waitForVisible();
         reviewItems.set(label);
@@ -189,6 +204,11 @@ public class ResultPage extends HomePage {
         hotelLabel.scrollToView();
         hotelLabel.click();
         DriverUtils.switchToWindow(DriverUtils.getWindowHandles().size());
+    }
+
+    public double getReviewPoint(String hotelName) {
+        hotelReviewPointLabel.set(hotelName);
+        return Double.valueOf(hotelReviewPointLabel.getText().trim());
     }
 
 
@@ -217,4 +237,7 @@ public class ResultPage extends HomePage {
     BaseElement detailReviewPopup = new BaseElement("//div[@data-selenium='demographics-review-container']");
     BaseElement reviewItems = new BaseElement("//span[@data-selenium='review-name']");
     BaseElement hotelReviewScoreLabel = new BaseElement("//li[@data-selenium='hotel-item'][%s]//div[@data-element-name='property-card-review']");
+    BaseElement hotelReviewPointLabel = new BaseElement("//div[contains(@class,'Section PropertyCard__Section--propertyInfo')]//h3[text()='%s']/ancestor::li//div[@class='ReviewWithDemographic']//div/p");
+    BaseElement reviewBarItemsScore = new BaseElement("//span[.='%s']/following-sibling::strong");
+
 }

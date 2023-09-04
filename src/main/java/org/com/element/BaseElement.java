@@ -190,6 +190,13 @@ public class BaseElement {
     public String getText() {
         return findElement().getText();
     }
+    public String getInnerText() {
+        return findElement().getOwnText();
+    }
+
+    public String getTextViaJS(){
+       return driver().executeJavaScript("return arguments[0].text",findElement());
+    }
 
     public List<String> getAllText() {
         try {
