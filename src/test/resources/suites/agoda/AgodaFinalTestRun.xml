@@ -7,7 +7,7 @@
     <parameter name="browser" value="chrome"/>
     <test name="Run Test Case For Agoda - Final test">
         <classes>
-<!--            <class name="testcases.agoda.Agoda_FinalExam_TC_01"/>-->
+            <class name="testcases.agoda.Agoda_FinalExam_TC_01"/>
             <class name="testcases.agoda.Agoda_FinalExam_TC_02"/>
         </classes>
     </test>

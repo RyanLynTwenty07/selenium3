@@ -29,6 +29,11 @@ public class FavouritePage {
                 && numberRooms.getText().startsWith(String.valueOf(roomsNum));
     }
 
+    public void removeFavourite(){
+        if(heartIcon.isDisplayed()){
+            heartIcon.click();
+        }
+    }
 
     BaseElement favouriteCard = new BaseElement("//div[@data-selenium='favorite-group-card']");
     BaseElement dynamicInfo = new BaseElement("//div[normalize-space()='%s']");
@@ -36,4 +41,6 @@ public class FavouritePage {
     BaseElement checkOutDate = new BaseElement("//div[@data-selenium='checkOutText']");
     BaseElement numberPerson = new BaseElement("//span[@data-selenium='adultValue']");
     BaseElement numberRooms = new BaseElement("//div[@data-selenium='roomValue']");
+    BaseElement heartIcon = new BaseElement("//*[contains(@class,'Favorite__SvgNoneStroke')]");
+
 }

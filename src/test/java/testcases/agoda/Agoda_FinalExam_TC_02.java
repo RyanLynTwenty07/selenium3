@@ -9,6 +9,8 @@ import org.example.data.agoda.ReviewData;
 import org.example.data.agoda.SearchData;
 import org.example.data.agoda.UserData;
 import org.example.page.agoda.*;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -46,7 +48,7 @@ public class Agoda_FinalExam_TC_02 extends TestBase {
         Assert.assertTrue(homePage.checkHotelDisplayCorrectDestination(customSearchList, destination), "VP: Verify Hotel searched display with correct destination");
 
         Logger.info("Step 4: select Filter check box");
-        resultPage.checkFilterOption("Property facilities","Swimming pool" );
+        resultPage.checkFilterOption("Property facilities", "Swimming pool");
         customSearchList = resultPage.getHotels(5);
         firstHotel = customSearchList.get(0);
         firstHotelName = firstHotel.getHotelName();
@@ -77,10 +79,17 @@ public class Agoda_FinalExam_TC_02 extends TestBase {
         favouritePage.selectFavouriteHotels();
 
         Assert.assertTrue(favouritePage.checkHotelDisplayCorrectly(firstHotel), "VP: Verify Hotel should display correct info");
+
+        Logger.info("Current behavior is out of date or Bug, so test case will fail at this step");
         Assert.assertTrue(favouritePage.checkDateInfoDisplayCorrectly(searchData.getCheckInDate(),
-                searchData.getCheckOutDate(), searchData.getNumberOfPeople(), searchData.getNumberOfRooms()),
-        "VP: Verify Date and Quantity should display correct info");
+                        searchData.getCheckOutDate(), searchData.getNumberOfPeople(), searchData.getNumberOfRooms()),
+                "VP: Verify Date and Quantity should display correct info");
         Assert.assertAll("Complete Test case!");
+    }
+
+    @AfterMethod(description = "Final - Clean up data", alwaysRun = true)
+    public void cleanUp() {
+        favouritePage.removeFavourite();
     }
 
     HomePage homePage = new HomePage();
