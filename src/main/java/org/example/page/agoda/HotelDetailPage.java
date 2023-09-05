@@ -24,13 +24,22 @@ public class HotelDetailPage extends HomePage {
         return hotel.getHotelName().equals(hotelHeader.getText());
     }
 
+    public String getFullyAddress(){
+        return hotelAddressLabel.getText().trim();
+    }
+
     public boolean checkHotelAddress(String hotelAddress) {
         Logger.info("Hotel Address: " + hotelAddress + " - Hotel Address after search: " + hotelAddressLabel.getText());
-        return hotelAddress.equals(hotelAddressLabel.getText());
+        return hotelAddressLabel.getText().contains(hotelAddress);
     }
 
     public boolean checkSwimmingPoolAvailable() {
         return swimmingPoolLabel.isDisplayed();
+    }
+
+    public boolean checkFacilitiesDisplayed(String facilities) {
+        facilitiesItem.set(facilities);
+        return facilitiesItem.isDisplayed();
     }
 
     public List<String> getReviewScoreList() {
@@ -60,6 +69,17 @@ public class HotelDetailPage extends HomePage {
         return reviewDataList;
     }
 
+    public boolean isRoomOptionDisplay(String option){
+        roomOptions.set(option);
+        return roomOptions.isDisplayed();
+    }
+
+    public void addHotelToSaveList(){
+        DriverUtils.waitForPageLoad();
+        favouriteIcon.click();
+        DriverUtils.waitForPageLoad();
+    }
+
     BaseElement loadingLabel = new BaseElement("//div[@class='AboveTheFlowPlaceholder']");
     BaseElement promoGotItButton = new BaseElement("//span[text()='Got it']/ancestor::button");
     BaseElement hotelHeader = new BaseElement("//p[@data-selenium='hotel-header-name']");
@@ -68,4 +88,7 @@ public class HotelDetailPage extends HomePage {
     BaseElement tooltipBoxItems = new BaseElement("//div[@class='rc-tooltip-content']//div[contains(@class,'Review-travelerGrade')]//span");
     BaseElement tooltipBoxItemsScore = new BaseElement("//div[@data-selenium='review-card-popup']//span[@class='Review-travelerGradeCategory' and text()='%s']/following-sibling::span");
     BaseElement reviewNumberLabel = new BaseElement("(//div[@class='ReviewScoreCompact__score']//p)[1]");
+    BaseElement roomOptions = new BaseElement("//div[@data-selenium='RoomGridFilter-filter']//following-sibling::div[text()='%s']");
+    BaseElement favouriteIcon = new BaseElement("//i[@data-element-name='favorite-heart']");
+    BaseElement facilitiesItem = new BaseElement("//div[@data-element-name='facility-highlights']/div/div/p[contains(.,'%s')]");
 }

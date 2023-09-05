@@ -53,7 +53,7 @@ public class DriverUtils {
     }
 
     public static void scrollToTop() {
-        DriverManager.driver().executeJavaScript("window.scrollBy(0,-1500)", "");
+        DriverManager.driver().executeJavaScript("window.scrollBy(0,-2000)", "");
     }
 
     public static void scrollToBot() {

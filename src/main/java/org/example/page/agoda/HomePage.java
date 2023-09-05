@@ -129,6 +129,13 @@ public class HomePage implements IHomePage {
         return true;
     }
 
+    public void selectUserMenuItem(String item){
+        userIcon.click();
+        userMenuItems.set(item);
+        userMenuItems.waitForVisible();
+        userMenuItems.click();
+    }
+
     protected BaseElement loadingSpinner = new BaseElement("//div[@id='ModalLoadingSpinner']");
     protected BaseElement placeBox = new BaseElement("//div[@id='autocomplete-box']");
     protected BaseElement checkInBox = new BaseElement("//div[@id='check-in-box']");
@@ -145,4 +152,6 @@ public class HomePage implements IHomePage {
     protected BaseElement searchButton = new BaseElement("//button[@data-selenium='searchButton']");
     protected BaseElement promoNoThankButton = new BaseElement("//button[text()='No thanks']");
     protected BaseElement loadingBox = new BaseElement("//*[@id='ModalLoadingSpinner']");
+    protected BaseElement userIcon = new BaseElement("//div[@data-element-name='user-menu']");
+    protected BaseElement userMenuItems = new BaseElement("//a[normalize-space()='%s']");
 }

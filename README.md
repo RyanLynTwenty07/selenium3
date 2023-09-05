@@ -33,8 +33,10 @@
 2. To run script for EX 2: AGODA
 3. To run script for EX 3: LogiGear Mail
 Please set environment variable:
-username ="", 
-password =""
+user ="", 
+key =""
+
+
 
 # Associate with Jenkins
    - Migrate and associate test run with Jenkins

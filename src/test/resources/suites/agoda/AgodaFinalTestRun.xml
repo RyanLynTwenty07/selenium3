@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite configfailurepolicy="continue" name="Selenium lv3" parallel="tests" thread-count="1">
+    <listeners>
+        <listener class-name="org.com.testng.TestListener"/>
+    </listeners>
+    <parameter name="browser" value="chrome"/>
+    <test name="Run Test Case For Agoda - Final test">
+        <classes>
+<!--            <class name="testcases.agoda.Agoda_FinalExam_TC_01"/>-->
+            <class name="testcases.agoda.Agoda_FinalExam_TC_02"/>
+        </classes>
+    </test>
+</suite>

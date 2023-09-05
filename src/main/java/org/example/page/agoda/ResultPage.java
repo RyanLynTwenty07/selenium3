@@ -52,16 +52,21 @@ public class ResultPage extends HomePage {
         int size = name.size() > numberHotels ? numberHotels : name.size();
         for (int i = 0; i < size; i++) {
             destination.set(name.get(i));
-            finalPriceLabel.set(name.get(i));
-            finalPriceSoldOutLabel.set(name.get(i));
+            destination.scrollToView();
             double hotelRating = getHotelRating(i);
-            String priceLabel = finalPriceSoldOutLabel.isDisplayed() ? finalPriceSoldOutLabel.getText().replace("₫ ", "") : finalPriceLabel.getText();
-            double price = Double.valueOf(priceLabel.replace(",", ""));
+            double price = getPrice(name.get(i));
             Hotel hotel = new Hotel(name.get(i), destination.getText(), hotelRating, price);
             hotels.add(hotel);
         }
         Logger.info(String.format("Found %s hotels - %s", hotels.size(), hotels));
         return hotels;
+    }
+
+    public double getPrice(String hotel) {
+        finalPriceLabel.set(hotel);
+        finalPriceSoldOutLabel.set(hotel);
+        String priceLabel = finalPriceSoldOutLabel.isDisplayed() ? finalPriceSoldOutLabel.getText().replace("₫ ", "") : finalPriceLabel.getText();
+        return Double.valueOf(priceLabel.replace(",", ""));
     }
 
     public boolean checkHotel(Hotel hotel, int index) {
@@ -148,12 +153,30 @@ public class ResultPage extends HomePage {
             case "3 stars":
                 filterCheckBox.set(" 3-Star rating ");
                 break;
-            case "Non-smoking":
+            default:
                 filterCheckBox.set(option);
                 break;
         }
         filterCheckBox.scrollToView();
         filterCheckBox.click();
+        DriverUtils.scrollToTop();
+        loadingSpinner.waitForDisappear();
+        DriverUtils.waitForPageLoad();
+    }
+
+    public void checkFilterOption(String... options) {
+        DriverUtils.waitForPageLoad();
+        Logger.info("Check Option " + options.toString());
+        switch (options[1]) {
+            case "3 stars":
+                leftFilterCheckBox.set(options[0], " 3-Star rating ");
+                break;
+            default:
+                leftFilterCheckBox.set(options[0], options[1]);
+                break;
+        }
+        leftFilterCheckBox.scrollToView();
+        leftFilterCheckBox.click();
         DriverUtils.scrollToTop();
         loadingSpinner.waitForDisappear();
         DriverUtils.waitForPageLoad();
@@ -200,6 +223,8 @@ public class ResultPage extends HomePage {
     }
 
     public void clickHotel(int index) {
+        DriverUtils.scrollToTop();
+        DriverUtils.waitForPageLoad();
         hotelLabel.set(index);
         hotelLabel.scrollToView();
         hotelLabel.click();
@@ -212,8 +237,8 @@ public class ResultPage extends HomePage {
     }
 
 
-    BaseElement finalPriceLabel = new BaseElement("//div[h3[.='%s']]/ancestor::li//div[@data-element-name='final-price']/span[@data-selenium='display-price']");
-    BaseElement finalPriceSoldOutLabel = new BaseElement("//div[h3[.='%s']]/ancestor::li//div[@data-element-name='final-price']");
+    BaseElement finalPriceLabel = new BaseElement("//div[h3[normalize-space()='%s']]/ancestor::li//div[@data-element-name='final-price']/span[@data-selenium='display-price']");
+    BaseElement finalPriceSoldOutLabel = new BaseElement("//div[h3[normalize-space()='%s']]/ancestor::li//div[@data-element-name='final-price']");
 
     BaseElement searchSortButton = new BaseElement("//button[@data-element-name='search-sort-dropdown']");
     BaseElement sortByPriceDropDownButton = new BaseElement("//li[@data-element-name='search-sort-price']/button");
@@ -222,7 +247,7 @@ public class ResultPage extends HomePage {
     BaseElement hotelDestination = new BaseElement("//li[@data-selenium='hotel-item'][1]//span[@data-selenium='area-city-text']/span");
     BaseElement tourButton = new BaseElement("//*[@id='categories-tabs-tab-2']");
     BaseElement hotelNameLabel = new BaseElement("//div/h3[@data-selenium ='hotel-name']");
-    BaseElement destination = new BaseElement("//div[h3[.='%s']]/following-sibling::div//span[@data-selenium='area-city-text']/span");
+    BaseElement destination = new BaseElement("//div[h3[normalize-space()='%s']]/following-sibling::div//span[@data-selenium='area-city-text']/span");
 
     BaseElement ratingLabel = new BaseElement("//li[@data-selenium='hotel-item'][%s]//div[@aria-label='rating']/*");
     BaseElement starItem = new BaseElement("//li[@data-selenium='hotel-item'][%s]//div[@aria-label='rating']/*[%s]/*[@href='%s']");
@@ -239,5 +264,5 @@ public class ResultPage extends HomePage {
     BaseElement hotelReviewScoreLabel = new BaseElement("//li[@data-selenium='hotel-item'][%s]//div[@data-element-name='property-card-review']");
     BaseElement hotelReviewPointLabel = new BaseElement("//div[contains(@class,'Section PropertyCard__Section--propertyInfo')]//h3[text()='%s']/ancestor::li//div[@class='ReviewWithDemographic']//div/p");
     BaseElement reviewBarItemsScore = new BaseElement("//span[.='%s']/following-sibling::strong");
-
+    BaseElement leftFilterCheckBox = new BaseElement("//div[span/span[text()='%s']]/following-sibling::div//span[@aria-label='%s']//input/following-sibling::span");
 }
